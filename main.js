@@ -1,64 +1,82 @@
-//Задание 1
+console.log("=======================Задание 1 и задание 2========================");
+
 {
-console.log("==================Задание 1====================");
-
-const students = ['Иванов','Петров','Сидоров','Кузнецов','Смирнов','Попов','Соколов'];
-const failedstudents = ['Сидоров','Смирнов','Попов'];
-
-const getStudents = function(students,failedstudents) {
-    const filter =students.reduce ( (acc,item)=>{
-        if (!failedstudents.includes(item)) {
-            acc.push(item);
-        } 
-        return acc;
-       
-    }, []);
-    return filter;
-}
-console.log('Список сдавших экзамены студентов :'  + getStudents(students,failedstudents))
-console.log("==================Конец задания====================");
-}
-
-//Задание 2
-{
-    console.log("==================Задание 2====================");
-
-    const allCashbox = [4500, 3210, 650, 1250, 7830, 990, 13900, 370];
-
-    const getAverageValue = ()=>{
-        let reduceResult = allCashbox.reduce((acc,elem)=>{
-            return acc + elem;
-        },0)
-        
-        const itog = reduceResult / allCashbox.length;
-        return Math.floor(itog);
-    }
-    console.log(getAverageValue(allCashbox));
-    console.log("==================Конец задания====================");
-
+  const randomArray = (length,max,min) =>{
+    
+    const newArray = [...Array(length)].fill().map(()=>Math.floor(Math.random() * (max - min + 1)) + min);
+      newArray.sort(function(a,b){
+        return a - b;
+      });
+      return newArray;
+  }
+  console.log('Всего элементов тут 60, максимальное число 100, а минимальное 1')
+  console.log(randomArray(60,100,1));
+  console.log('Всего элементов тут 40, максимальное число 0, а минимальное -5')
+  console.log(randomArray(40,0,-5));
 }
 
 
 
-    //Задание 2
+console.log("=======================Задание 3========================");
+
 {
+  const randomArray = (length,max,min,evenOrNot) =>{
+    
+    const newArray = [...Array(length)].fill().map(()=>Math.floor(Math.random() * (max - min + 1)) + min);
+    newArray.sort(function(a,b){
+      return a - b;
+    });
+      if (evenOrNot === "even") {
+      evenArray = newArray.filter( function (num) {
+        return num % 2 === 0 || num === 0;
 
-
-    console.log("==================Задание 3====================");
-
-    const names= ['Noah', 'Liam', 'Mason', 'Jacob', 'Robot', 'William', 'Ethan', 'Michael', 'Alexander'];
-
-    const addPrefix = (names, prefix) => {
-        for (i in names) {
-            names[i] = prefix + ' ' + names[i];
-          }
-          return names;
-    }
+      })
+      const uniqEven = [...new Set(evenArray)]
+      console.log(`Четные уникальные числа`+ ' ' + uniqEven); 
+      return evenArray;
+      } else if (evenOrNot === "odd") {
+        oddArray = newArray.filter( function (num) {
+          return num % 2 === 1;
+        })
+        const uniqOdd = [...new Set(oddArray)]
+      console.log(`НЕЧетные уникальные числа`+ ' ' + uniqOdd); 
+        return oddArray;
+      }
       
-      console.log(addPrefix(names, "Mr"));
-      console.log("==================Конец задания====================");
-
+  }
+  
+  console.log( ` Все Четные Числа:` + ' ' +randomArray(60,100,1,"even"));
+  console.log( ` Все НЕЧетные Числа:` + ' ' +randomArray(60,100,1,"odd"));
+  
 }
+
+console.log("=======================Задание 4========================");
+
+function checkYear(year) {
+  if ((year % 4 === 0 && year % 100 !== 0) || (year % 100 === 0 && year % 400 === 0)) {
+     return year;
+  } else {
+     return false;
+    }
+}
+
+function getYears(from,to) {
+  const years = [];
+  for (let i = from; i <= to; i++) {        
+       years.push(i);
+  }
+  const result = [];
+
+years.forEach(function(year) {
+  if (checkYear(year))
+  result.push(year);
+});
+
+return result;
+}
+
+console.log(getYears(1812,1945))
+
 
 
 
